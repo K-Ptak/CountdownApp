@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/center_horizontal_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/timer_vertical_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
+
+    <TextView
+        android:id="@+id/minute_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="56sp"
+        app:layout_constraintBottom_toBottomOf="@id/timer_vertical_guideline"
+        app:layout_constraintEnd_toStartOf="@id/minute_2"
+        app:layout_constraintStart_toStartOf="@id/center_horizontal_guideline"
+        app:layout_constraintTop_toTopOf="@id/timer_vertical_guideline"
+        tools:text="0" />
+
+    <TextView
+        android:id="@+id/minute_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="56sp"
+        app:layout_constraintBottom_toBottomOf="@+id/minute_1"
+        app:layout_constraintEnd_toStartOf="@+id/separator"
+        app:layout_constraintStart_toEndOf="@+id/minute_1"
+        app:layout_constraintTop_toTopOf="@+id/minute_1"
+        tools:text="0" />
+
+    <TextView
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/separator"
+        android:textSize="56sp"
+        app:layout_constraintBottom_toBottomOf="@+id/minute_2"
+        app:layout_constraintEnd_toStartOf="@id/second_1"
+        app:layout_constraintStart_toEndOf="@+id/minute_2"
+        app:layout_constraintTop_toTopOf="@+id/minute_2" />
+
+    <TextView
+        android:id="@+id/second_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="56sp"
+        app:layout_constraintBottom_toBottomOf="@+id/separator"
+        app:layout_constraintEnd_toStartOf="@id/second_2"
+        app:layout_constraintStart_toEndOf="@+id/separator"
+        app:layout_constraintTop_toTopOf="@+id/separator"
+        tools:text="0" />
+
+    <TextView
+        android:id="@+id/second_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="56sp"
+        app:layout_constraintBottom_toBottomOf="@+id/second_1"
+        app:layout_constraintEnd_toEndOf="@id/center_horizontal_guideline"
+        app:layout_constraintStart_toEndOf="@+id/second_1"
+        app:layout_constraintTop_toTopOf="@+id/second_1"
+        tools:text="0" />
+
+    <ImageButton
+        android:id="@+id/minute_add"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/add_minute_button"
+        android:src="@drawable/ic_add"
+        android:text="@string/start"
+        app:layout_constraintBottom_toTopOf="@id/minute_1"
+        app:layout_constraintEnd_toEndOf="@id/minute_2"
+        app:layout_constraintStart_toStartOf="@id/minute_1" />
+
+    <ImageButton
+        android:id="@+id/minute_minus"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/minus_minute_button"
+        android:src="@drawable/ic_minus"
+        android:text="@string/start"
+        app:layout_constraintEnd_toEndOf="@id/minute_2"
+        app:layout_constraintStart_toStartOf="@id/minute_1"
+        app:layout_constraintTop_toBottomOf="@id/minute_1" />
+
+    <ImageButton
+        android:id="@+id/second_add"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/add_second_button"
+        android:src="@drawable/ic_add"
+        android:text="@string/start"
+        app:layout_constraintBottom_toTopOf="@id/second_1"
+        app:layout_constraintEnd_toEndOf="@id/second_2"
+        app:layout_constraintStart_toStartOf="@id/second_1" />
+
+    <ImageButton
+        android:id="@+id/second_minus"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/minus_second_button"
+        android:src="@drawable/ic_minus"
+        android:text="@string/start"
+        app:layout_constraintEnd_toEndOf="@id/second_2"
+        app:layout_constraintStart_toStartOf="@id/second_1"
+        app:layout_constraintTop_toBottomOf="@id/second_1" />
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/pause"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/pause"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pause"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/stop"
+        app:layout_constraintStart_toEndOf="@id/start" />
+
+    <Button
+        android:id="@+id/stop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/stop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/pause" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
