@@ -49,9 +49,19 @@ class MainActivity : AppCompatActivity() {
         val addSecond = findViewById<ImageButton>(R.id.second_add)
         val minusSecond = findViewById<ImageButton>(R.id.second_minus)
 
+
         val start = findViewById<Button>(R.id.start)
         val pause = findViewById<Button>(R.id.pause)
         val stop = findViewById<Button>(R.id.stop)
+
+
+        if(seconds <= 0) {
+            start.isEnabled = false
+            pause.isEnabled = false
+            stop.isEnabled = false
+        } else {
+            updateButtonsOnView()
+        }
 
         updateTimeOnView()
 
@@ -64,6 +74,7 @@ class MainActivity : AppCompatActivity() {
         start.setOnClickListener {
             if (isRunning) return@setOnClickListener
             isRunning = true
+            stop.isEnabled = true
             updateButtonsOnView()
             timer = startCountdown()
             timer.start()
@@ -72,6 +83,7 @@ class MainActivity : AppCompatActivity() {
         pause.setOnClickListener {
             if (!isRunning) return@setOnClickListener
             isRunning = false
+            stop.isEnabled = true
             updateButtonsOnView()
             if (::timer.isInitialized) {
                 timer.cancel()
@@ -81,6 +93,8 @@ class MainActivity : AppCompatActivity() {
         stop.setOnClickListener {
             isRunning = false
             updateButtonsOnView()
+            start.isEnabled = false
+            stop.isEnabled = false
             if (::timer.isInitialized) {
                 timer.cancel()
             }
@@ -119,6 +133,7 @@ class MainActivity : AppCompatActivity() {
         minute2.text = minutes[1].toString()
         second1.text = seconds[0].toString()
         second2.text = seconds[1].toString()
+
     }
 
     private fun updateButtonsOnView() {
@@ -134,27 +149,36 @@ class MainActivity : AppCompatActivity() {
         updateTimeOnView()
     }
 
+    private fun reenableStart() {
+        val start = findViewById<Button>(R.id.start)
+        start.isEnabled = seconds >= 1 && !isRunning
+    }
+
     private fun addMinute() {
         if (seconds >= 60 * 60) return
         seconds += 60
+        reenableStart()
         updateTimeOnView()
     }
 
     private fun minusMinute() {
         if (seconds < 60) return
         seconds -= 60
+        reenableStart()
         updateTimeOnView()
     }
 
     private fun addSecond() {
         if (seconds > 60 * 60 + 59) return
         seconds += 1
+        reenableStart()
         updateTimeOnView()
     }
 
     private fun minusSecond() {
         if (seconds <= 0) return
         seconds -= 1
+        reenableStart()
         updateTimeOnView()
     }
 
@@ -167,5 +191,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun onCountdownFinish() {
         Toast.makeText(this, "Finished!", Toast.LENGTH_SHORT).show()
+        val start = findViewById<Button>(R.id.start)
+        val stop = findViewById<Button>(R.id.stop)
+        start.isEnabled = false
+        stop.isEnabled = false
     }
 }
